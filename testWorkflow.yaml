@@ -1,0 +1,14 @@
+name: GitHub Actions Test
+run-name: ${{ github.actor }} workflow test
+on: [push]
+jobs:
+  testJob:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Hi! I'm running because of a ${{ github.event_name }} event."
+      - run: echo "Checking out the repository from ${{ github.repository }}."
+      - name: Clone repository code
+        uses: actions/checkout@v4
+      - run: echo "Repository cloned, I think I'm ready. The files look like this:"
+      - name: List files
+        run: ls

@@ -1,0 +1,19 @@
+$schema: https://azuremlschemas.azureedge.net/latest/commandJob.schema.json
+code: .
+command: python Charlie.py --trainingdata ${{ inputs.training_data }}
+inputs:
+  training_data:
+    type: uri_folder
+    path: azureml:Human-Activity:1
+
+outputs:
+  model_output:
+    type: uri_folder
+    mode: upload
+
+
+
+environment: azureml://registries/azureml/environments/sklearn-1.1/versions/14
+compute: azureml:Project-Compute
+experiment_name: project-experiment
+description: Project
