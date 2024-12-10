@@ -1,0 +1,25 @@
+name: AzureML CI/CD
+
+on:
+  push:
+    branches:
+      - staging
+
+jobs:
+  azure-job:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Setup Azure CLI
+      uses: azure/CLI@v1
+
+    - name: Login to Azure
+      uses: azure/login@v1
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+    - name: Submit Azure ML Job
+      run: |
+        az ml job create --file job_config.yml
